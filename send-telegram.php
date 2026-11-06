@@ -18,7 +18,6 @@ if (!is_file(__DIR__ . '/telegram-config.local.php')) {
     respond(500, ['ok' => false, 'description' => 'Отправка заявок временно недоступна.']);
 }
 require __DIR__ . '/telegram-config.local.php';
-$chatId = $chatId ?? 'chadId';
 
 $name = is_string($_POST['name'] ?? null) ? trim($_POST['name']) : '';
 $phone = is_string($_POST['phone'] ?? null) ? trim($_POST['phone']) : '';
