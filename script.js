@@ -226,7 +226,7 @@ form.addEventListener('submit', event => {
         phoneInput.value = formatPhoneNumber(phoneDigits(phoneInput.value));
     }
     if (!form.reportValidity()) return;
-    status.textContent = 'Демо-режим: бот не подключён. Заявка не отправлена.';
+    status.textContent = 'Демо-версия, бот не подключен.';
     delete status.dataset.state;
 });
 });
