@@ -229,7 +229,6 @@ form.addEventListener('submit', event => {
     status.textContent = 'Демо-версия, бот не подключен.';
     delete status.dataset.state;
 });
-});
 
 loadCatalog('products');
 loadCatalog('services');
