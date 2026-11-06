@@ -44,25 +44,5 @@ $data = [
     'chat_id' => $chatId,
     'text' => $message
 ];
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-curl_setopt($ch, CURLOPT_TIMEOUT, 20);
-$response = curl_exec($ch);
-if ($response === false) {
-    respond(502, [
-        'ok' => false,
-        'description' => 'Не удалось подтвердить отправку. Свяжитесь с нами перед повторной отправкой заявки.'
-    ]);
-}
-$httpStatus = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-$result = json_decode($response, true);
-if (!is_array($result) || !isset($result['ok']) || !is_bool($result['ok'])) {
-    respond(502, ['ok' => false, 'description' => 'Не удалось подтвердить отправку. Свяжитесь с нами перед повторной отправкой заявки.']);
-}
-if ($httpStatus < 200 || $httpStatus >= 300 || $result['ok'] !== true) {
-    respond(502, ['ok' => false, 'description' => 'Не удалось отправить заявку. Свяжитесь с нами.']);
-}
+
 respond(200, ['ok' => true]);
