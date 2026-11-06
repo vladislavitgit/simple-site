@@ -220,31 +220,15 @@ overlay.addEventListener('keydown', event => {
     }
 });
 
-form.addEventListener('submit', async event => {
+form.addEventListener('submit', event => {
     event.preventDefault();
-    if (submitting) return;
-    if (phoneInput.value) phoneInput.value = formatPhoneNumber(phoneDigits(phoneInput.value));
-    if (!form.reportValidity()) return;
-    submitting = true;
-    submitButton.disabled = true;
-    form.setAttribute('aria-busy', 'true');
-    status.textContent = 'Отправляем заявку…';
-    delete status.dataset.state;
-    const data = new FormData(form);
-    data.set('phone', `+7 ${phoneInput.value}`);
-    nameInput.readOnly = true;
-    phoneInput.readOnly = true;
-    status.textContent = 'Демо-версия, бот не подключен.';
-    status.dataset.state = 'success';
-    form.reset();
-    selection.hidden = true;
-    finally {
-        submitting = false;
-        submitButton.disabled = false;
-        nameInput.readOnly = false;
-        phoneInput.readOnly = false;
-        form.setAttribute('aria-busy', 'false');
+    if (phoneInput.value) {
+        phoneInput.value = formatPhoneNumber(phoneDigits(phoneInput.value));
     }
+    if (!form.reportValidity()) return;
+    status.textContent = 'Демо-режим: бот не подключён. Заявка не отправлена.';
+    delete status.dataset.state;
+});
 });
 
 loadCatalog('products');
